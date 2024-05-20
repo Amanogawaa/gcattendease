@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, throwError } from 'rxjs';
 import { AuthserviceService } from './authservice.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,8 @@ export class EventService {
     private helper: JwtHelperService
   ) {}
 
-  private API_URL = 'http://gc-attendease.online/backend/api/';
+  // private API_URL = 'http://gc-attendease.online/backend/api/';
+  private API_URL = environment.apiUrl;
 
   getCurrentUserId(): number | null {
     const mytoken = sessionStorage.getItem('token');
