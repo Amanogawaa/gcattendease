@@ -1,0 +1,14 @@
+<mat-dialog-content class="bg-white-bone_white p-10">
+  <div class="relative p-4 w-full max-w-2xl max-h-full">
+    <label for="avatar-input-file">
+      <div class="icon-wrapper">
+        <input
+          type="file"
+          id="avatar-input-file"
+          accept="image/*"
+          (change)="onFileChange($event)"
+        />
+      </div>
+    </label>
+  </div>
+</mat-dialog-content>

@@ -1,0 +1,187 @@
+<main class="w-full bg-beige">
+  <div class="p-4 mt-16 sm:ml-64">
+    <div>
+      <p
+        class="font-secondary mb-2 text-custom_black text-2xl tracking-wide font-bold"
+      >
+        Dashboard
+      </p>
+      <hr class="h-px mb-6 bg-serpentine border-0 dark:bg-gray-700" />
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      <div
+        class="lg:w-full md:col-span-1 border border-gray-200 shadow-lg rounded-md p-10 bg-ivy"
+      >
+        <!-- calendar here -->
+        <app-calendar class="sm:max-w-[400px]"></app-calendar>
+      </div>
+
+      <div class="grid-col-2 grid-flow-row">
+        <div
+          class="max-w-full max-h-80 bg-ivy border border-gray-200 rounded-lg shadow p-4 dark:bg-gray-800 dark:border-gray-700"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center">
+              <span
+                class="text-xl me-1 font-bold leading-none text-first_frost"
+              >
+                Registered Events
+              </span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6 text-first_frost"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z"
+                />
+              </svg>
+            </div>
+
+            <button
+              (click)="onClickButton()"
+              class="text-sm font-medium text-first_frost hover:underline"
+            >
+              View all
+            </button>
+          </div>
+          
+          <div
+            class="relative overflow-x-auto shadow-md sm:rounded-lg max-h-52 overflow-y-auto border border-gray-200"
+          >
+            <table
+              class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+            >
+              <!-- header -->
+              <thead
+                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky top-0 z-10"
+              >
+                <tr>
+                  <th scope="col" class="px-6 py-3">Event Name</th>
+                  <th scope="col" class="px-6 py-3">Date</th>
+                  <th scope="col" class="px-6 py-3">Status</th>
+                </tr>
+              </thead>
+              <!-- body -->
+              <tbody>
+                <tr
+                  *ngFor="let event of events; let i = index"
+                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                >
+                  <td
+                    scope="row"
+                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    {{ event.event_name }}
+                  </td>
+                  <td class="px-6 py-4">{{ event.event_start_date | date }}</td>
+                  <div class="flex items-center">
+                    <td class="py-4">
+                      <span
+                        class="flex items-center text-sm font-normal text-gray-900 dark:text-white me-3"
+                      >
+                        <span
+                          *ngIf="event.eventState === 'upcoming'"
+                          class="flex w-2.5 h-2.5 bg-yellow-300 rounded-full me-1.5 flex-shrink-0"
+                        ></span>
+                        <span
+                          *ngIf="event.eventState === 'done'"
+                          class="flex w-2.5 h-2.5 bg-carribean_green-mint rounded-full me-1.5 flex-shrink-0"
+                        ></span>
+                        <span
+                          *ngIf="event.eventState === 'ongoing'"
+                          class="flex w-2.5 h-2.5 bg-blue-500 rounded-full me-1.5 flex-shrink-0"
+                        ></span>
+                        {{ event.eventState | uppercase }}
+                      </span>
+                    </td>
+                  </div>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="relative overflow-x-auto mt-2 shadow-md sm:rounded-lg">
+          <div class="w-full bg-white shadow-lg border border-ivy rounded-sm">
+            <div
+              class="w-full text-sm rounded-lg text-left rtl:text-right text-gray-500 dark:text-gray-400"
+            >
+              <table
+                class="w-full text-sm text-left rtl:text-right rounded-b-lg text-gray-500 dark:text-gray-400"
+              >
+                <thead
+                  class="text-xs text-first_frost uppercase bg-ivy dark:bg-gray-700 dark:text-gray-400"
+                >
+                  <tr>
+                    <th scope="col" class="px-6 py-3">Status</th>
+                    <th scope="col" class="px-6 py-3">Event Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                  >
+                    <td class="p-2">
+                      <span
+                        class="flex items-center text-sm font-medium text-gray-900 dark:text-white me-3"
+                        ><span
+                          class="flex items-center w-2.5 h-2.5 bg-blue-600 rounded-full me-1.5 flex-shrink-0"
+                        >
+                        </span
+                        >Ongoing
+                      </span>
+                    </td>
+                    <td class="p-2">
+                      Event status blue, the blue dot means that the event is
+                      currently being held and will end soon
+                    </td>
+                  </tr>
+                  <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                  >
+                    <td class="p-2">
+                      <span
+                        class="flex items-center font-medium text-sm text-gray-900 dark:text-white me-3"
+                        ><span
+                          class="flex items-center w-2.5 h-2.5 bg-carribean_green-mint rounded-full me-1.5 flex-shrink-0"
+                        >
+                        </span
+                        >Done
+                      </span>
+                    </td>
+                    <td class="p-2">
+                      Event status green, the green dot means that the event is
+                      currently over
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="p-2">
+                      <span
+                        class="flex items-center text-sm font-medium text-gray-900 dark:text-white me-3"
+                        ><span
+                          class="flex items-center w-2.5 h-2.5 bg-yellow-300 rounded-full me-1.5 flex-shrink-0"
+                        >
+                        </span
+                        >Upcoming
+                      </span>
+                    </td>
+                    <td class="p-2">
+                      Event status yellow, the yellow dot means that the event
+                      has not yet been held or will be held soon
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
