@@ -11,7 +11,7 @@ import { interceptorInterceptor } from './core/service/interceptor.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient(withInterceptors([interceptorInterceptor])),
+    provideHttpClient(),
     provideNativeDateAdapter(),
     provideAnimationsAsync(),
     JwtHelperService,
