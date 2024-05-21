@@ -17,31 +17,31 @@ export class AuthserviceService {
   //get a user or all users
   getUsers(id: any = null): Observable<any> {
     if (id) {
-      return this.http.get<any>(`${this.API_URL}users/${id}`);
+      return this.http.get<any>(`${this.API_URL}/users/${id}`);
     } else {
-      return this.http.get<any>(`${this.API_URL}users`);
+      return this.http.get<any>(`${this.API_URL}/users`);
     }
   }
 
   getRoles(id: any = null): Observable<any> {
     if (id) {
-      return this.http.get<any>(`${this.API_URL}roles/${id}`);
+      return this.http.get<any>(`${this.API_URL}/roles/${id}`);
     } else {
-      return this.http.get<any>(`${this.API_URL}roles`);
+      return this.http.get<any>(`${this.API_URL}/roles`);
     }
   }
 
   editUserRole(id: number, inputdata: any) {
-    return this.http.post<any>(`${this.API_URL}edituserrole/${id}`, inputdata);
+    return this.http.post<any>(`${this.API_URL}/edituserrole/${id}`, inputdata);
   }
 
   // auth
   registerStudent(data: any): Observable<any> {
-    return this.http.post(`${this.API_URL}adduser`, data);
+    return this.http.post(`${this.API_URL}/adduser`, data);
   }
 
   loginStudent(data: any): Observable<any> {
-    return this.http.post(`${this.API_URL}login`, data);
+    return this.http.post(`${this.API_URL}/login`, data);
   }
 
   isUserLoggedIn(): boolean {
@@ -72,39 +72,39 @@ export class AuthserviceService {
   }
 
   uploadImage(id: any, file: FormData): Observable<any> {
-    return this.http.post(`${this.API_URL}uploadimage/${id}`, file);
+    return this.http.post(`${this.API_URL}/uploadimage/${id}`, file);
   }
 
   updateStudent(data: any, id: any): Observable<any> {
-    return this.http.post(`${this.API_URL}edituser/${id}`, data);
+    return this.http.post(`${this.API_URL}/edituser/${id}`, data);
   }
 
   getStudentProfile(id: any): Observable<any> {
-    return this.http.get<any>(`${this.API_URL}users/${id}`);
+    return this.http.get<any>(`${this.API_URL}/users/${id}`);
   }
 
   // events
   getAllEvents(): Observable<any> {
-    return this.http.get<any>(`${this.API_URL}events`);
+    return this.http.get<any>(`${this.API_URL}/events`);
   }
 
   addEvent(data: any): Observable<any> {
-    return this.http.post(`${this.API_URL}addevent`, data);
+    return this.http.post(`${this.API_URL}/addevent`, data);
   }
 
   editEvent(data: any) {
-    return this.http.post(`${this.API_URL}editevent`, data);
+    return this.http.post(`${this.API_URL}/editevent`, data);
   }
 
   uploadAvatar(userId: number, file: File) {
     const formData = new FormData();
     formData.append('file', file);
 
-    return this.http.post(`${this.API_URL}uploadimage/${userId}`, formData);
+    return this.http.post(`${this.API_URL}/uploadimage/${userId}`, formData);
   }
 
   getAvatar(userId: number) {
-    return this.http.get(`${this.API_URL}getavatar/${userId}`, {
+    return this.http.get(`${this.API_URL}/getavatar/${userId}`, {
       responseType: 'blob',
     });
   }
@@ -112,17 +112,19 @@ export class AuthserviceService {
   //ATTENDANCE API FUNCTIONS - Denz
 
   getUsersByEventAttendance(eventId: number) {
-    return this.http.get(`${this.API_URL}getusersbyeventattendance/${eventId}`);
+    return this.http.get(
+      `${this.API_URL}/getusersbyeventattendance/${eventId}`
+    );
   }
 
   getAttendanceByUser(userId: number, eventId: number) {
     return this.http.get(
-      `${this.API_URL}getattendancebyuser/${userId}/${eventId}`
+      `${this.API_URL}/getattendancebyuser/${userId}/${eventId}`
     );
   }
 
   getAttendanceImage(attendanceId: number) {
-    return this.http.get(`${this.API_URL}getattendanceimage/${attendanceId}`, {
+    return this.http.get(`${this.API_URL}/getattendanceimage/${attendanceId}`, {
       responseType: 'blob',
     });
   }
@@ -135,7 +137,7 @@ export class AuthserviceService {
     const formData = new FormData();
     formData.append('file', file);
     return this.http.post(
-      `${this.API_URL}uploadattendanceimage/${eventId}/${userId}`,
+      `${this.API_URL}/uploadattendanceimage/${eventId}/${userId}`,
       formData
     );
   }
@@ -143,6 +145,6 @@ export class AuthserviceService {
   // attendance
   markAttendance(eventId: number, userId: number): Observable<any> {
     const data = { event_id: eventId, user_id: userId };
-    return this.http.post<any>(`${this.API_URL}markattendance`, data);
+    return this.http.post<any>(`${this.API_URL}/markattendance`, data);
   }
 }

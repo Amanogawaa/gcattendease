@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, throwError } from 'rxjs';
 import { AuthserviceService } from './authservice.service';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root',
@@ -30,29 +30,29 @@ export class EventService {
   }
 
   addEvent(data: any): Observable<any> {
-    return this.http.post(`${this.API_URL}addevent`, data);
+    return this.http.post(`${this.API_URL}/addevent`, data);
   }
 
   getAllEvents(): Observable<any> {
-    return this.http.get<any>(`${this.API_URL}events`);
+    return this.http.get<any>(`${this.API_URL}/events`);
   }
 
   deleteEvent(data: any): Observable<any> {
-    return this.http.delete(`${this.API_URL}deleteevent/${data}`);
+    return this.http.delete(`${this.API_URL}/deleteevent/${data}`);
   }
 
   getEventId(event_id: any): Observable<any> {
-    return this.http.get(`${this.API_URL}geteventid`, event_id);
+    return this.http.get(`${this.API_URL}/geteventid`, event_id);
   }
 
   editEvent(id: any, data: any) {
-    return this.http.post(`${this.API_URL}editevent/${id}`, data);
+    return this.http.post(`${this.API_URL}/editevent/${id}`, data);
   }
 
   getUserEvent(): Observable<any> {
     const userId = this.getCurrentUserId();
     if (userId) {
-      return this.http.get(`${this.API_URL}userevents/${userId}`);
+      return this.http.get(`${this.API_URL}/userevents/${userId}`);
     } else {
       return throwError('User ID not found');
     }
@@ -60,18 +60,18 @@ export class EventService {
 
   registerForEvent(eventId: number, userId: any): Observable<any> {
     const data = { event_id: eventId, user_id: userId };
-    return this.http.post(`${this.API_URL}register`, data);
+    return this.http.post(`${this.API_URL}/register`, data);
   }
 
   uploadEvent(eventId: number, file: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);
 
-    return this.http.post(`${this.API_URL}uploadevent/${eventId}`, formData);
+    return this.http.post(`${this.API_URL}/uploadevent/${eventId}`, formData);
   }
 
   getEventImage(event_id: number): Observable<any> {
-    return this.http.get(`${this.API_URL}geteventimage/${event_id}`, {
+    return this.http.get(`${this.API_URL}/geteventimage/${event_id}`, {
       responseType: 'blob',
     });
   }
