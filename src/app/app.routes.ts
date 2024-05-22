@@ -3,6 +3,8 @@ import { UserComponent } from './modules/user/user.component';
 import { OrganizerComponent } from './modules/organizer/organizer.component';
 import { authenGuard } from './core/authen.guard';
 import { AdminDashboardComponent } from './modules/admin/pages/admin-dashboard/admin-dashboard.component';
+import { SignupComponent } from './auth/pages/signup/signup.component';
+import { LoginComponent } from './auth/pages/login/login.component';
 
 export const routes: Routes = [
   {
@@ -13,18 +15,12 @@ export const routes: Routes = [
 
   {
     path: 'login',
-    loadComponent: () =>
-      import('./auth/pages/login/login.component').then(
-        (c) => c.LoginComponent
-      ),
+    component: LoginComponent,
   },
 
   {
     path: 'signup',
-    loadComponent: () =>
-      import('./auth/pages/signup/signup.component').then(
-        (c) => c.SignupComponent
-      ),
+    component: SignupComponent,
   },
 
   {
