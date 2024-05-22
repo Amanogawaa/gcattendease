@@ -12,9 +12,7 @@ export class AuthserviceService {
   // private API_URL = 'http://localhost/gcattendease-api/api';
 
   // webapi
-  // private API_URL = 'https://gc-attendease.online/backend/api';
-  private API_URL =
-    'https://srv1158-files.hstgr.io/4dfa4ac6d931850f/files/public_html/backend/api';
+  private API_URL = 'https://gc-attendease.online/backend/api';
 
   isLoggedIn: boolean = false;
 
