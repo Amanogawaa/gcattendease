@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AuthserviceService } from '../../../../core/service/authservice.service';
 import { PreviewComponent } from '../../components/preview/preview.component';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { EventService } from '../../../../core/service/event.service';
 
 interface Event {
@@ -16,7 +16,7 @@ interface Event {
   event_registration_start: Date;
   event_registration_end: Date;
   session: string;
-  event_image: SafeResourceUrl | undefined;
+  event_image: SafeUrl | undefined;
 }
 
 @Component({
@@ -62,7 +62,7 @@ export class EventsComponent implements OnInit {
           if (imageResult.size > 0) {
             const url = URL.createObjectURL(imageResult);
             eventObject.event_image =
-              this.sanitizer.bypassSecurityTrustResourceUrl(url);
+              this.sanitizer.bypassSecurityTrustUrl(url);
           }
         });
         return eventObject;
