@@ -2,15 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthserviceService {
   constructor(private http: HttpClient, private helper: JwtHelperService) {}
-  // private API_URL = 'http://localhost/attendease/backend/api/';
-  private API_URL = environment.apiUrl;
+  //local
+  // private API_URL = 'http://localhost/gcattendease-api/api';
+
+  // webapi
+  private API_URL = 'https://gc-attendease.online/backend/api';
 
   isLoggedIn: boolean = false;
 
